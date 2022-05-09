@@ -1,0 +1,5 @@
+﻿  polynomial.c
+D:\수업\자료구조\fundamental-of-data-structure-in-c\polynomial\polynomial\polynomial.c(97): warning C4716: 'multiply': 값을 반환해야 합니다.
+D:\수업\자료구조\fundamental-of-data-structure-in-c\polynomial\polynomial\polynomial.c(23): warning C4716: 'polynomial_read': 값을 반환해야 합니다.
+D:\수업\자료구조\fundamental-of-data-structure-in-c\polynomial\polynomial\polynomial.c(80): warning C4716: 'polynomial_makeD': 값을 반환해야 합니다.
+  polynomial.vcxproj -> D:\수업\자료구조\fundamental-of-data-structure-in-c\polynomial\x64\Debug\polynomial.exe
