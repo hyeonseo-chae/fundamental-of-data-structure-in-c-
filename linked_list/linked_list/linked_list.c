@@ -1,6 +1,6 @@
 ﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
 #include <malloc.h>
 #define MAX_DEGREE 101
 
@@ -79,6 +79,7 @@ void addNode(ptrDterm* root, float coef, int expon) {
 }
 
 ptrDterm p = NULL;
+
 polynomial multiply() {
    
     for (int i = 0; i < 3; i++) {
@@ -93,15 +94,6 @@ void polyPrint(ptrDterm poly) {
 
     ptrDterm p = poly;
 
-    if (p->expon >= 1) {
-            printf("%gx%d", p->coef, p->expon);
-    }
-
-
-    else printf("%gx0", p->coef);
-
-    p = p->link;
-
     while (p) {
         while (p->coef == 0) {
             p = p->link;
@@ -111,18 +103,10 @@ void polyPrint(ptrDterm poly) {
             printf("+");
         }
 
-        if (p->expon > 1) {
-            if (p->coef == 1)
-                printf("1x%d", p->expon);
-            else if (p->coef != 0)
-                printf("%gx%d", p->coef, p->expon);
+        if (p->expon >= 0) {
+            printf("%gx%d", p->coef, p->expon);
         }
 
-        else if (p->expon == 1) {
-            if (p->coef == 1) printf("x");
-            else printf("%gx1", p->coef);
-        }
-        else printf("%gx0", p->coef);
         p = p->link;
     }
     printf("\n");
@@ -190,5 +174,5 @@ int main()
     printf("D(x)= ");
     polyPrint(p);
 
-
+    free(D);
 }
