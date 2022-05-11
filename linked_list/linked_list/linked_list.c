@@ -36,10 +36,11 @@ polynomial polynomial_read() {
 }
 
 ptrDterm createNode(float coef, int expon) {
-    ptrDterm p = (ptrDterm)malloc(sizeof(D));
+    ptrDterm p = (ptrDterm)malloc(sizeof(D)*3);
     p->coef = coef;
     p->expon = expon;
     p->link = NULL;
+    free(D);
     return p;
 }
 
@@ -174,5 +175,5 @@ int main()
     printf("D(x)= ");
     polyPrint(p);
 
-    free(D);
+   
 }
