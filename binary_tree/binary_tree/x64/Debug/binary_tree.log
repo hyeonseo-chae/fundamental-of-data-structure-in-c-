@@ -1,9 +1,2 @@
 ﻿  binary_tree.c
-C:\Users\eric7\Desktop\수업\자료구조\fundamental-of-data-structure-in-c-\binary_tree\binary_tree\binary_tree.c(14,13): warning C4013: 'strstr'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-C:\Users\eric7\Desktop\수업\자료구조\fundamental-of-data-structure-in-c-\binary_tree\binary_tree\binary_tree.c(14,31): warning C4047: '!=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
-C:\Users\eric7\Desktop\수업\자료구조\fundamental-of-data-structure-in-c-\binary_tree\binary_tree\binary_tree.c(17,36): warning C4047: '!=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
-C:\Users\eric7\Desktop\수업\자료구조\fundamental-of-data-structure-in-c-\binary_tree\binary_tree\binary_tree.c(20,36): warning C4047: '!=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
-C:\Users\eric7\Desktop\수업\자료구조\fundamental-of-data-structure-in-c-\binary_tree\binary_tree\binary_tree.c(23,37): warning C4047: '!=': 'int'의 간접 참조 수준이 'void *'과(와) 다릅니다.
-C:\Users\eric7\Desktop\수업\자료구조\fundamental-of-data-structure-in-c-\binary_tree\binary_tree\binary_tree.c(6,1): warning C4047: '초기화 중': 'char'의 간접 참조 수준이 'void *'과(와) 다릅니다.
-C:\Users\eric7\Desktop\수업\자료구조\fundamental-of-data-structure-in-c-\binary_tree\binary_tree\binary_tree.c(7,7): warning C4101: 's1' :참조되지 않은 지역 변수입니다.
-  binary_tree.vcxproj -> C:\Users\eric7\Desktop\수업\자료구조\fundamental-of-data-structure-in-c-\binary_tree\x64\Debug\binary_tree.exe
+  binary_tree.vcxproj -> D:\수업\자료구조\fundamental-of-data-structure-in-c-\binary_tree\x64\Debug\binary_tree.exe
