@@ -48,7 +48,7 @@ void main()
 		}
 
 		
-
+		char split[2][15];
 		if (a == 'A') {
 			if (jj > 7 && jj < 16) {
 				printf("UnKnown\n");
@@ -67,6 +67,58 @@ void main()
 			printf("\n");
 		}
 		else if (a == 'R') {
+
+
+	
+			char* num = NULL;
+			num = strtok(s2, ",");
+			int oq = 0;
+			while (num != NULL) {
+				strcpy(split[oq], num);
+				oq++;
+				num = strtok(NULL, ",");
+			}
+			int splitjj1 = 0;
+			int splitjj2 = 0;
+			for (splitjj1 = 0; splitjj1 < 16; splitjj1++) {
+				if (strcmp(name_binary_tree[splitjj1], split[0]) == 0) {
+					break;
+				}
+
+			}
+
+			for (splitjj2 = 0; splitjj2 < 16; splitjj2++) {
+				if (strcmp(name_binary_tree[splitjj2], split[1]) == 0) {
+					break;
+				}
+
+			}
+
+			char s_list[5];
+			int yy = 0;
+			while(splitjj2!= splitjj1) {
+				s_list[yy] = splitjj2+'0'; //Çüº¯È¯
+				yy++;
+				if (splitjj2 % 2 == 1) {
+					s_list[yy] = 'F';
+				}
+				else {
+					s_list[yy] = 'M';
+				}
+				yy++;
+				splitjj2 = splitjj2 / 2;
+			}
+			s_list[yy] = splitjj2 + '0';
+
+			for(int u = 0; u <= yy; u++) {
+				if (yy % 2 == 1) {
+					printf("%s->", name_binary_tree[(s_list[u]-'0')]);
+				}
+				else {
+					printf("%c->", s_list[u]);
+				}
+			
+			}
 
 		}
 	}
