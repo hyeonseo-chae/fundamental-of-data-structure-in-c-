@@ -1,9 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h> 
-char name_binary_tree[16][15] = { "","Dusty","Honey","Brandy","Brunhide","Terry","Coyote","Nugget","Gill","Tansey","Tweed","Zoe","Crocus","Primrose","Nous","Belle" };
+char name_binary_tree[16][15] = { "","Dusty","Honey","Brandy","Brunhide","Terry","Coyote","Nugget","Gill","Tansey","Tweed","Zeo","Crocus","Primrose","Nous","Belle" };
 int preorderprint[16] = { 0, };
 int preoirdernum = 0;
+
 void preorder(int k)
 {
 	
@@ -51,6 +52,11 @@ void main()
 		
 		char split[2][15];
 		if (a == 'A') {
+			for(int q = 0; q < 16; q++) {
+				preorderprint[q] = 0;
+
+			}
+			preoirdernum = 0;
 			if (jj > 7 && jj < 16) {
 				printf("UnKnown\n");
 			}
@@ -82,9 +88,9 @@ void main()
 			}
 			printf("\n");
 		}
+
+
 		else if (a == 'R') {
-
-
 	
 			char* num = NULL;
 			num = strtok(s2, ",");
