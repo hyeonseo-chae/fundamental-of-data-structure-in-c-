@@ -2,14 +2,16 @@
 #include <stdio.h>
 #include <string.h> 
 char name_binary_tree[16][15] = { "","Dusty","Honey","Brandy","Brunhide","Terry","Coyote","Nugget","Gill","Tansey","Tweed","Zoe","Crocus","Primrose","Nous","Belle" };
-
+int preorderprint[16] = { 0, };
+int preoirdernum = 0;
 void preorder(int k)
 {
 	
 	if (k > 15) {
 		return;
 	}
-	printf("%s, ", name_binary_tree[k]);
+	preorderprint[preoirdernum] = k;
+	preoirdernum++;
 	preorder(k * 2);
 	preorder(k * 2 + 1);
 
@@ -41,7 +43,6 @@ void main()
 		int jj;
 		for (jj = 0; jj < 16; jj++) {
 			if (strcmp(name_binary_tree[jj], s2)==0) {
-				printf("%d\n", jj);
 				break;
 			}
 		
@@ -55,6 +56,18 @@ void main()
 			}
 			preorder(jj*2);
 			preorder(jj * 2+1);
+			for(int e = 0; e < 16; e++) {
+				if (preorderprint[e] != 0) {
+					printf("%s", name_binary_tree[preorderprint[e]]);
+					if (preorderprint[e + 1] != 0) {
+						printf(", ");
+					}
+					else {
+						printf("\n");
+					}
+				}
+				
+			}
 		}
 		else if (a == 'D') {
 			if (jj ==1) {
@@ -62,7 +75,10 @@ void main()
 			}
 			while (jj>1.9) {
 				jj = jj / 2;
-				printf("%s, ", name_binary_tree[jj]);
+				printf("%s", name_binary_tree[jj]);
+				if (jj != 1) {
+					printf(", ");
+				}
 			}
 			printf("\n");
 		}
@@ -109,17 +125,21 @@ void main()
 				splitjj2 = splitjj2 / 2;
 			}
 			s_list[yy] = splitjj2 + '0';
-
-			for(int u = 0; u <= yy; u++) {
-				if (yy % 2 == 1) {
-					printf("%s->", name_binary_tree[(s_list[u]-'0')]);
+			 
+			for(int u = yy; u >= 0; u--) {
+				if (u % 2 == 0) {
+					printf("%s", name_binary_tree[(s_list[u]-'0')]);
 				}
 				else {
-					printf("%c->", s_list[u]);
+					printf("%c", s_list[u]);
+				}
+
+				if (u != 0) {
+					printf(" -> ");
 				}
 			
 			}
-
+			printf("\n");
 		}
 	}
 }
