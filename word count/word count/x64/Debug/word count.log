@@ -1,0 +1,5 @@
+﻿  test.c
+C:\Users\eric7\Desktop\수업\자료구조\fundamental-of-data-structure-in-c-\word count\word count\test.c(114,18): error C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+  word_count.c
+C:\Users\eric7\Desktop\수업\자료구조\fundamental-of-data-structure-in-c-\word count\word count\word_count.c(13,8): error C2143: 구문 오류: '{'이(가) '*' 앞에 없습니다.
+  코드를 생성하고 있습니다...
