@@ -1,18 +1,31 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
+#include <stdlib.h>
 
 #define MAX_SIZE 10
 
+typedef struct element {
+	int key;
+}element;
+
 typedef struct node* treePointer;
-typedef struct {
-	char word[MAX_SIZE];
+typedef struct node{
+    element word;
 	treePointer leftChild, rightChild;
 
-}node;
+};
 
-node* iterSearch(treePointer tree, char k[]) {
+
+
+element *iterSearch(treePointer tree, char k[]) {
 	while (tree) {
 		if (k == tree->word.key) return &(tree->word);
+		if (k < tree->word.key) {
+			tree = tree->leftChild;
+		}
+		else {
+			tree = tree->rightChild;
+		}
 	}
 
 
