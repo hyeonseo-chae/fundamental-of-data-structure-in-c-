@@ -5,12 +5,13 @@
 #define MAX_SIZE 10
 
 typedef struct element {
-	int key;
+	char word[MAX_SIZE];
+	int cnt;
 }element;
 
 typedef struct node* treePointer;
 typedef struct node{
-    element word;
+	element key;
 	treePointer leftChild, rightChild;
 
 };
@@ -19,8 +20,8 @@ typedef struct node{
 
 element *iterSearch(treePointer tree, char k[]) {
 	while (tree) {
-		if (k == tree->word.key) return &(tree->word);
-		if (k < tree->word.key) {
+		if (k == tree->key.word) return &(tree->key.word);
+		if (k < tree->key.word) {
 			tree = tree->leftChild;
 		}
 		else {
