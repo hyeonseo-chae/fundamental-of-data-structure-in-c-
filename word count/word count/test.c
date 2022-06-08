@@ -1,138 +1,107 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
-#include <conio.h>
-#include <stdlib.h>
+#include<stdlib.h>
 #include <string.h>
+#define MAX_NAME 20 // name 사이즈 정의
+#define MAX_NUMBER 40 // number 사이즈 정의
 
-#define MAXLEN 9
+typedef struct list { // 정보 저장 구조체
+    char name[MAX_NAME]; //이름
+    char number[MAX_NUMBER]; //전화번호
+}list;
 
-//struct for node
-struct node {
-    char *value;            // all void* types replaced by char*
-    struct node *p_left;
-    struct node *p_right;
-};
+typedef struct tree { // 노드 구조체
+    list key; //정보 저장 구조체
+    struct tree* left; // 링크
+    struct tree* right; // 링크
+}tree;
 
-//use typedef to make calling the compare function easier
-typedef int (*Compare)(const char*, const char*);
+void insert(tree** root, list data) { // 삽입 함수
+    tree* p = NULL; //부모 노드
+    tree* t = *root; // 자식 노드
 
-//inserts elements into the tree
-void insert(char* key, struct node** leaf, Compare cmp)
-{
-    int res;
-    if (*leaf == NULL) {
-        *leaf = (struct node*)malloc(sizeof(struct node));
-        (*leaf)->value = malloc(strlen(key) + 1);     // memory for key
-        strcpy((*leaf)->value, key);                   // copy the key
-        (*leaf)->p_left = NULL;
-        (*leaf)->p_right = NULL;
-        //printf(  "\nnew node for %s" , key);
+    while (t != NULL) { // t가 NULL이 아니다 -> 루트가 있으며 탐색이 끝나면 말단이다.
+        if (strcmp(data.name, t->key.name) == 0) return; // 키 중복 확인
+        p = t; // 다음 값을 순회하기 위해 저장
+        if (strcmp(data.name, t->key.name) < 0) t = t->left; // 루트 키값 보다 작음, 왼쪽으로 이동
+        else t = t->right; // 루트 키값 보다 큼, 오른쪽으로 이동
     }
-    else {
-        res = cmp(key, (*leaf)->value);
-        if (res < 0)
-            insert(key, &(*leaf)->p_left, cmp);
-        else if (res > 0)
-            insert(key, &(*leaf)->p_right, cmp);
-        else                                            // key already exists
-            printf("Key '%s' already in tree\n", key);
+
+    tree* newtree = (tree*)malloc(sizeof(tree)); // 새로운 노드 동적할당으로 생성
+    newtree->key = data; // 키값 삽입
+    newtree->left = newtree->right = NULL; // 링크 초기화
+
+    if (p != NULL) { // p는 삽입할곳에 부모 노드를 가리키고 있음
+        if (strcmp(data.name, p->key.name) < 0) p->left = newtree; // 키 값을 비교해서 작으면 왼쪽
+        else p->right = newtree; // 키 값을 비교해서 크면 오른쪽
     }
+    else *root = newtree;  // 다 해당 안되면 처음 생성되는 루트 노드이다.
 }
 
-//compares value of the new node against the previous node
-int CmpStr(const char* a, const char* b)
-{
-    return (strcmp(a, b));     // string comparison instead of pointer comparison
-}
-
-char* input(void)
-{
-    static char line[MAXLEN + 1];       // where to place key    
-    printf("Please enter a string : ");
-    fgets(line, sizeof line, stdin);
-    return (strtok(line, "\n"));    // remove trailing newline
-}
-
-//recursive function to print out the tree inorder
-void in_order(struct node* root)
-{
-    if (root != NULL) {
-        in_order(root->p_left);
-        printf("   %s\n", root->value);     // string type
-        in_order(root->p_right);
+void print(tree* root) { // 트리 출력 함수
+    if (root != NULL) { // 중위 순회
+        print(root->left);
+        printf("\t %s : %s", root->key.name, root->key.number);
+        printf("\t\t\t [");
+        for (int i = 0; i <= MAX_NAME; i++) {
+            if (root->key.name[i] == NULL)break;
+            else printf("%d ", root->key.name[i]);
+        } printf("]\n");
+        print(root->right);
     }
+
 }
 
-//searches elements in the tree
-void search(char* key, struct node* leaf, Compare cmp)  // no need for **
-{
-    int res;
-    if (leaf != NULL) {
-        res = cmp(key, leaf->value);
-        if (res < 0)
-            search(key, leaf->p_left, cmp);
-        else if (res > 0)
-            search(key, leaf->p_right, cmp);
-        else
-            printf("\n'%s' found!\n", key);     // string type
-    }
-    else printf("\nNot in tree\n");
-    return;
-}
+tree* search(tree* root, list data) { // 검색 함수
 
-void delete_tree(struct node** leaf)
-{
-    if (*leaf != NULL) {
-        delete_tree(&(*leaf)->p_left);
-        delete_tree(&(*leaf)->p_right);
-        free((*leaf)->value);         // free the key
-        free((*leaf));
+    while (root != NULL) {
+        if (strcmp(data.name, root->key.name) == 0) return root; // 키 값 일치하면 root 리턴
+        else if (strcmp(data.name, root->key.name) < 0) root = root->left; // 키 값이 작으면 왼쪽으로 이동
+        else if (strcmp(data.name, root->key.name) > 0) root = root->right; // 키 값이 크면 오른쪽으로 이동
     }
 }
+void run() { // 시스템 구동
 
-//displays menu for user
-void menu()
-{
-    printf("\nPress 'i' to insert an element\n");
-    printf("Press 's' to search for an element\n");
-    printf("Press 'p' to print the tree inorder\n");
-    printf("Press 'f' to destroy current tree\n");
-    printf("Press 'q' to quit\n");
-}
+    list e; // 정보 구조체
+    char str; // 스위치문에서 입력 받을 변수
+    tree* root = NULL; // 최초 트리
+    tree* temp; // 검색 노드를 반환 받을 노드
 
-int main()
-{
-    struct node* p_root = NULL;
-    char* value;
-    char option = 'x';
+    while (1)
+    {
+        printf("삽입(i) 탐색(s) 출력(p) 삭제(d)");
+        scanf_s("%c", &str, sizeof(str));
+        getchar();
+        switch (str)
+        {
+        case 'i':
+            printf("친구의 이름:");
+            gets(e.name);
+            printf("친구의 전화번호:");
+            gets(e.number);
+            insert(&root, e);
+            break;
+        case 's':
+            printf("검색 할 친구의 이름:");
+            gets(e.name);
+            temp = search(root, e);
+            printf("친구의 전화번호:%s\n", temp->key.number);
+            break;
+        case 'p':
+            printf("출력:");
+            print(root);
+            break;
+        case 'd':
+            printf("삭제 할 친구의 이름:");
+            gets(e.name);
+            delete(&root, e);
+            break;
+        default:
+            printf("다시 입력");
+            break;
 
-    while (option != 'q') {
-        //displays menu for program
-        menu();
-
-        //gets the char input to drive menu
-        option = getch();           // instead of two getchar() calls
-
-        if (option == 'i') {
-            value = input();
-            printf("Inserting %s\n", value);
-            insert(value, &p_root, (Compare)CmpStr);
-        }
-        else if (option == 's') {
-            value = input();
-            search(value, p_root, (Compare)CmpStr);     // no need for **
-        }
-        else if (option == 'p') {
-            in_order(p_root);
-        }
-        else if (option == 'f') {
-            delete_tree(&p_root);
-            printf("Tree destroyed");
-            p_root = NULL;
-        }
-        else if (option == 'q') {
-            printf("Quitting");
         }
     }
-    return 0;
+}
+int main() {
+    run(); // 시스템 구동 함수 실행
 }
