@@ -1,6 +1,4 @@
 ﻿  word_count.c
-C:\Users\eric7\Desktop\수업\자료구조\fundamental-of-data-structure-in-c-\word count\word count\word_count.c(41,13): warning C4047: 'return': 'treePointer *'의 간접 참조 수준이 'treePointer'과(와) 다릅니다.
-C:\Users\eric7\Desktop\수업\자료구조\fundamental-of-data-structure-in-c-\word count\word count\word_count.c(47,1): warning C4047: '초기화 중': 'treePointer'의 간접 참조 수준이 'treePointer *'과(와) 다릅니다.
-C:\Users\eric7\Desktop\수업\자료구조\fundamental-of-data-structure-in-c-\word count\word count\word_count.c(83,15): warning C4047: '함수': 'treePointer'의 간접 참조 수준이 'treePointer *'과(와) 다릅니다.
-C:\Users\eric7\Desktop\수업\자료구조\fundamental-of-data-structure-in-c-\word count\word count\word_count.c(83,10): warning C4024: 'insert': 형식 및 실제 매개 변수 1의 형식이 서로 다릅니다.
-  word count.vcxproj -> C:\Users\eric7\Desktop\수업\자료구조\fundamental-of-data-structure-in-c-\word count\x64\Debug\word count.exe
+D:\수업\자료구조\fundamental-of-data-structure-in-c-\word count\word count\word_count.c(44,16): warning C4133: 'return': 'treePointer'과(와) 'element *' 사이의 형식이 호환되지 않습니다.
+D:\수업\자료구조\fundamental-of-data-structure-in-c-\word count\word count\word_count.c(50,1): warning C4133: '초기화 중': 'element *'과(와) 'treePointer' 사이의 형식이 호환되지 않습니다.
+  word count.vcxproj -> D:\수업\자료구조\fundamental-of-data-structure-in-c-\word count\x64\Debug\word count.exe
