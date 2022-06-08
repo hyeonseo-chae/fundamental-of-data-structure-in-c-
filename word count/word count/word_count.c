@@ -1,66 +1,56 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
+#include<string.h>
 #include <stdlib.h>
 
 #define MAX_SIZE 10
 
 
-
-
+typedef struct node* treePointer;
 
 typedef struct element {
-	char word[MAX_SIZE];
+	char key[MAX_SIZE];
 	int cnt;
 }element;
 
-typedef struct node* treePointer;
+
 
 typedef struct node{
-	element key;
+	element data;
 	treePointer leftChild, rightChild;
-};
+}node;
 
-treePointer modifiedSearch(treePointer root, int k)
+
+
+treePointer *modifiedSearch(treePointer root, char k[])
 {
 	treePointer temp = root;
 	while (root)
 	{
-		temp = root;
-		if (k < root->data.key)
+		if (strcmp(root->data.key,k) < 0) {
 			root = root->leftChild;
-		else if (k > root->data.key)
+		}
+		else if (strcmp(root->data.key, k) > 0) {
 			root = root->rightChild;
-		else
+		}
+		else {
 			return NULL;
+		}		temp = root;
+
 	}
 	return temp;
 }
 
 
-element *iterSearch(treePointer tree, char k[]) {
-	while (tree) {
-		if (k == tree->key.word) return &(tree->key.word);
-		if (k < tree->key.word) {
-			tree = tree->leftChild;
-		}
-		else {
-			tree = tree->rightChild;
-		}
-	}
 
-
-}
-
-void insert(treePointer* node, element word, iType theItem) {
-	treePointer ptr, temp = modifiedSearch(*node, k);
-	if (temp || !(*node)) {
-		MALLOC(ptr, sizeof(*ptr));
-		ptr->key = k;
-		ptr->word.item = theItem;
-		ptr->leftChild = ptr->rightChild = NULL;
-		if (*node) {
-		
-			if (k < temp->word.key) {
+void insert(treePointer node, char k[]) {
+	treePointer ptr, temp = modifiedSearch(node, k);
+	if (temp || !(node)) {
+		ptr = (treePointer)malloc(sizeof(*ptr));
+		strcpy(ptr->data.key, k);
+		ptr->leftChild = NULL; ptr->rightChild = NULL;
+		if (node) {
+			if (strcmp(k, temp->data.key)<0) {
 		
 				temp->leftChild = ptr;
 			}
@@ -69,20 +59,31 @@ void insert(treePointer* node, element word, iType theItem) {
 			}
 		}
 		else {
-			*node = ptr;
+			node = ptr;
 		}
 	}
 
 }
 
+void inorder(treePointer node) {
+	if (node) {
+		inorder(node->leftChild);
+		printf("%s", node->data.key);
+		printf("%d", node->data.cnt);
+		inorder(node->rightChild);
+	}
+}
+
 void main() {
-	char temp_word[MAX_SIZE];
+	element temp;
+	treePointer node = NULL;
 	while (1) {
-		printf("next word ? ");
-		scanf("%s", temp_word);
+		printf("next word ? \n");
+		scanf("%s", temp.key);
+		insert(&node, temp.key);
+		temp.cnt++;
+		inorder(node);
 
 	}
-	
-
 
 }
